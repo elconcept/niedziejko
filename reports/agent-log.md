@@ -25,3 +25,4 @@
 - 2026-09-25 T20: hero responsive srcset (800w 26KB webp / 1200w 43KB) for mobile LCP bytes. Gate PASS.
 - 2026-09-25 T20+T21: hero srcset 800w; desktop audit 99/95/100/100 (LCP 0.8s) vs mobile 78 lab-bound; desktop a11y residual = nav links over translucent sticky header -> header solid var(--bg).
 - 2026-09-25 T21b: real header rule found (transparent base + translucent is-scrolled); base set solid var(--bg). Hook amendment: never run on_run_end after a failed task script.
+- 2026-09-25 T22: nav links #6E665B (desktop contrast), mobile nav restored (was display:none), H1 mobile clamp (overflow 0px both viewports, screenshot-verified).

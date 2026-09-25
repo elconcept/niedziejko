@@ -216,7 +216,8 @@ footer{
     }
 
     h1{
-        font-size:3.5rem;
+        font-size:clamp(2.05rem,9vw,2.9rem);
+        overflow-wrap:break-word;
     }
 }
 
@@ -264,7 +265,7 @@ footer{
 }
 
 .site-nav a{
-    color:var(--muted);
+    color:#6E665B;
     transition:var(--transition);
 }
 
@@ -356,8 +357,19 @@ footer .container{
         height:64px;
     }
 
+    .site-header-inner{
+        height:auto;
+        flex-direction:column;
+        padding:.9rem 0 .7rem;
+        gap:.55rem;
+    }
+
     .site-nav{
-        display:none;
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:.35rem 1.3rem;
+        font-size:.72rem;
     }
 
     .site-logo{
