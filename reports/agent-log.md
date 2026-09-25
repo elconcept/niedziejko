@@ -23,3 +23,4 @@
 - 2026-09-25 T18: audit3 78/100/100/100. a11y 93->100 CLOSED. Perf 78-80 plateau, zero LH opportunities, lab-bound -> STOP per optimize rule (no blind changes). Old audits pruned, final kept. Skills end: plan/execute/optimize/debug done; prompt-optimize N/A (no prompts in repo). Human leftovers: Pages https toggle, real-device glance.
 - 2026-09-25 T19: confirmed T18 logged+pushed (9ac9331 in sync with origin/main). Live sanity re-check.
 - 2026-09-25 T20: hero responsive srcset (800w 26KB webp / 1200w 43KB) for mobile LCP bytes. Gate PASS.
+- 2026-09-25 T20+T21: hero srcset 800w; desktop audit 99/95/100/100 (LCP 0.8s) vs mobile 78 lab-bound; desktop a11y residual = nav links over translucent sticky header -> header solid var(--bg).
