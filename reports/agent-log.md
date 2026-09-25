@@ -1,0 +1,18 @@
+# Agent log (only mine — short run reports)
+
+- 2026-09-25 T00: plan.md + tasks.json (11 tasks, validator ok) — commit bd185ba, push ok.
+- 2026-09-25 T01: purge banned 2.jpg, skeleton fix, drop orphan style.css, check_site PASS — 714f7d5, push ok.
+- 2026-09-25 T02: hero from 9.png right-half crop (83KB+webp), OG repoint — 7ca92d5, push ok.
+- 2026-09-25 T03: About from 4.png crop (102KB) — 85bcea0, push ok.
+- 2026-09-25 T04: Practice from 3.png crop (66KB), button accordion + aria — 84f0441, push ok.
+- 2026-09-25 T05: Values from 5.png crop (96KB), anchor wartosci — bc44139, push ok.
+- 2026-09-25 T06: Contact from 6.png crop (97KB), mailto/tel — 84d163c, push ok.
+- 2026-09-25 T07: gallery deleted, editorial grid/spacing — 627538a, push ok.
+- 2026-09-25 T08: type scale/header/buttons/reveal, copy-purge clean — d538361, push ok.
+- 2026-09-25 T09: JSON-LD valid, og-image 1200x630 68KB, favicon KN, robots/sitemap/404 — 8899152, push ok.
+- 2026-09-25 T10: preload+srcset, main.js 115 lines, all web JPG <=400KB — 7557a5d, push ok. (Fixed own srcset \\1 bug.)
+- 2026-09-25 T11: full sweep PASS, acceptance.md — d93dd40, push ok.
+- 2026-09-25 HOOK: on_run_end.sh + post-commit auto-push + CANONICAL_RULE.md — 03ef3c1, push ok (hook self-tested).
+- 2026-09-25 T12: Pages API snapshot (building at the time) — 052aea1, push ok.
+- 2026-09-25 T13: Pages built/cname ok/https false; errored builds = superseded bursts; fixed pages.json UTF-16 BOM (my redirect bug, now via wsl-side redirect) — c6dcc14, push ok.
+- 2026-09-25 T14: live https 200 (HSTS, http->https 301 via Cloudflare), hero-9.jpg 200 83KB, og-image 200 68KB — site serves latest build.
