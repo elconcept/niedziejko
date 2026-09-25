@@ -1,0 +1,9 @@
+BEFORE=8089
+.hero-image: removed 1
+.about-image: removed 1
+.gallery: removed 2
+.gallery figure: removed 1
+.practice-panel-inner: removed 1
+.practice-panel.is-open: removed 1
+multi-img/hover groups: removed 2
+AFTER=7192

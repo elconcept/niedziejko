@@ -17,3 +17,4 @@
 - 2026-09-25 T13: Pages built/cname ok/https false; errored builds = superseded bursts; fixed pages.json UTF-16 BOM (my redirect bug, now via wsl-side redirect) — c6dcc14, push ok.
 - 2026-09-25 T14: live https 200 (HSTS, http->https 301 via Cloudflare), hero-9.jpg 200 83KB, og-image 200 68KB — site serves latest build.
 - 2026-09-25 T15: live-content PASS (hero-9, no banned, 4 anchors, NAP, tel, 5+ imgs). Findings: WSL-python 403 -> fetch via curl+UA; live mailto is CF-obfuscated (__cf_email__), gate accepts both.
+- 2026-09-25 T16: optimize-loop CSS prune 8089->7192B (-11%): removed .hero-image/.about-image/.gallery(x3)/.practice-panel-inner/.practice-panel.is-open + dead img/hover groups. Kept .is-scrolled (live JS). Gate PASS.
