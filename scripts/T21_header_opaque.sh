@@ -7,9 +7,9 @@ import pathlib, sys
 root = pathlib.Path(sys.argv[1])
 p = root / "assets/css/styles.css"
 s = p.read_text(encoding="utf-8")
-old = "background:rgba(247,244,239,.92);backdrop-filter:blur(10px);"
+old = "    z-index:1000;\n"
 assert old in s, "header bg pattern missing"
-s = s.replace(old, "background:var(--bg);")
+s = s.replace(old, "    z-index:1000;\n    background:var(--bg);\n", 1)
 p.write_text(s, encoding="utf-8")
 print("T21 header opaque ok")
 PY

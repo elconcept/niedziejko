@@ -230,6 +230,7 @@ footer{
     left:0;
     width:100%;
     z-index:1000;
+    background:var(--bg);
 
     transition:
         background .25s ease,
