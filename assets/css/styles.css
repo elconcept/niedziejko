@@ -422,3 +422,11 @@ footer .container{
         font-size:1.1rem;
     }
 }
+.practice-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:5rem;align-items:start;}
+.practice-list{margin-top:2.5rem;border-top:1px solid var(--line);}
+.practice-item{border-bottom:1px solid var(--line);}
+.practice-item button{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;padding:1.4rem 0;font-family:"Baskervville",serif;font-size:clamp(1.3rem,2vw,1.8rem);color:var(--text);cursor:pointer;text-align:left;}
+.practice-panel{padding:0 0 1.4rem;color:var(--muted);max-width:40em;}
+.practice-media{margin:0;background:var(--surface);border:1px solid var(--line);padding:.9rem;position:sticky;top:6rem;}
+.practice-media img{aspect-ratio:3/4;object-fit:cover;}
+@media (max-width:900px){.practice-grid{grid-template-columns:1fr;}.practice-media{position:static;}}

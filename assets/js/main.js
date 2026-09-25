@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'Kompleksowa analiza i dochodzenie roszczeń od podmiotów prywatnych oraz instytucjonalnych.'
     };
 
-    document.querySelectorAll('.practice-item').forEach(item => {
+    document.querySelectorAll('.practice-item button').forEach(item => {
 
         const title = item.querySelector('span')?.textContent?.trim();
 
@@ -111,3 +111,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+;document.querySelectorAll('.practice-item button').forEach(function(btn){var panel=btn.parentElement.querySelector('.practice-panel');if(!panel)return;btn.addEventListener('click',function(){var open=btn.getAttribute('aria-expanded')==='true';document.querySelectorAll('.practice-item button[aria-expanded="true"]').forEach(function(o){o.setAttribute('aria-expanded','false');var pp=o.parentElement.querySelector('.practice-panel');if(pp)pp.hidden=true;});btn.setAttribute('aria-expanded',String(!open));panel.hidden=open;});});
