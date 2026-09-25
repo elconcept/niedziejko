@@ -78,7 +78,13 @@
     "T08",
     "T09",
     "T10",
-    "T11"
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15",
+    "T16",
+    "T17"
   ],
   "tasks": [
     {
@@ -919,6 +925,245 @@
         "gh",
         "lighthouse"
       ]
+    },
+    {
+      "id": "T12",
+      "title": "record Pages API status",
+      "serves": [
+        "c9"
+      ],
+      "description": "Snapshot Pages build status/cname/https into reports/pages.json.",
+      "files": [
+        {
+          "path": "reports/pages.json",
+          "action": "create",
+          "what": "Pages API snapshot + finding note"
+        }
+      ],
+      "subtasks": [
+        {
+          "id": "T12.1",
+          "description": "Snapshot Pages build status/cname/https into reports/pages.json."
+        }
+      ],
+      "tests": [
+        {
+          "description": "gate script or API check passes",
+          "kind": "integration"
+        }
+      ],
+      "acceptance_criteria": [
+        "recorded in agent-log and pushed"
+      ],
+      "depends_on": [
+        "T11"
+      ],
+      "estimated_loc": 30
+    },
+    {
+      "id": "T13",
+      "title": "fix pages.json encoding + finding",
+      "serves": [
+        "c9"
+      ],
+      "description": "Rewrite UTF-16 BOM artifact as UTF-8 note; record superseded-build finding.",
+      "files": [
+        {
+          "path": "reports/pages.json",
+          "action": "modify",
+          "what": "UTF-8 finding note"
+        }
+      ],
+      "subtasks": [
+        {
+          "id": "T13.1",
+          "description": "Rewrite UTF-16 BOM artifact as UTF-8 note; record superseded-build finding."
+        }
+      ],
+      "tests": [
+        {
+          "description": "gate script or API check passes",
+          "kind": "integration"
+        }
+      ],
+      "acceptance_criteria": [
+        "recorded in agent-log and pushed"
+      ],
+      "depends_on": [
+        "T12"
+      ],
+      "estimated_loc": 20
+    },
+    {
+      "id": "T14",
+      "title": "agent log + live HTTP check",
+      "serves": [
+        "c9"
+      ],
+      "description": "Create reports/agent-log.md; verify live 200/HSTS/assets.",
+      "files": [
+        {
+          "path": "reports/agent-log.md",
+          "action": "create",
+          "what": "personal run log"
+        }
+      ],
+      "subtasks": [
+        {
+          "id": "T14.1",
+          "description": "Create reports/agent-log.md; verify live 200/HSTS/assets."
+        }
+      ],
+      "tests": [
+        {
+          "description": "gate script or API check passes",
+          "kind": "integration"
+        }
+      ],
+      "acceptance_criteria": [
+        "recorded in agent-log and pushed"
+      ],
+      "depends_on": [
+        "T13"
+      ],
+      "estimated_loc": 40
+    },
+    {
+      "id": "T15",
+      "title": "live content verification",
+      "serves": [
+        "c9"
+      ],
+      "description": "Fetch live HTML (curl+UA, CF blocks bare python); assert hero/no-banned/anchors/NAP; accept CF-obfuscated email.",
+      "files": [
+        {
+          "path": "scripts/T15_live_content.sh",
+          "action": "create",
+          "what": "live gate"
+        },
+        {
+          "path": "reports/live-index.html",
+          "action": "create",
+          "what": "evidence"
+        }
+      ],
+      "subtasks": [
+        {
+          "id": "T15.1",
+          "description": "Fetch live HTML (curl+UA, CF blocks bare python); assert hero/no-banned/anchors/NAP; accept CF-obfuscated email."
+        }
+      ],
+      "tests": [
+        {
+          "description": "gate script or API check passes",
+          "kind": "integration"
+        }
+      ],
+      "acceptance_criteria": [
+        "recorded in agent-log and pushed"
+      ],
+      "depends_on": [
+        "T14"
+      ],
+      "estimated_loc": 60
+    },
+    {
+      "id": "T16",
+      "title": "optimize CSS dead selectors",
+      "serves": [
+        "c7"
+      ],
+      "description": "Prune dead selectors with before/after metric 8089->7192B; gate check_site.",
+      "files": [
+        {
+          "path": "assets/css/styles.css",
+          "action": "modify",
+          "what": "remove 9 dead rules"
+        },
+        {
+          "path": "scripts/T16_css_prune.sh",
+          "action": "create",
+          "what": "prune step"
+        },
+        {
+          "path": "reports/T16_optimize.txt",
+          "action": "create",
+          "what": "metric"
+        }
+      ],
+      "subtasks": [
+        {
+          "id": "T16.1",
+          "description": "Prune dead selectors with before/after metric 8089->7192B; gate check_site."
+        }
+      ],
+      "tests": [
+        {
+          "description": "gate script or API check passes",
+          "kind": "integration"
+        }
+      ],
+      "acceptance_criteria": [
+        "recorded in agent-log and pushed"
+      ],
+      "depends_on": [
+        "T15"
+      ],
+      "estimated_loc": 80
+    },
+    {
+      "id": "T17",
+      "title": "a11y landmark + contrast, lighthouse loop",
+      "serves": [
+        "c9"
+      ],
+      "description": "Add main landmark; eyebrow to #6E665B (5.15); audit live 80/93/100/100 -> 80/95/100/100; CSS cache noted.",
+      "files": [
+        {
+          "path": "index.html",
+          "action": "modify",
+          "what": "main wrapper"
+        },
+        {
+          "path": "assets/css/styles.css",
+          "action": "modify",
+          "what": "eyebrow color"
+        },
+        {
+          "path": "scripts/T17_a11y_landmark_contrast.sh",
+          "action": "create",
+          "what": "fix step"
+        },
+        {
+          "path": "reports/lighthouse.json",
+          "action": "create",
+          "what": "audit 1"
+        },
+        {
+          "path": "reports/lighthouse2.json",
+          "action": "create",
+          "what": "audit 2"
+        }
+      ],
+      "subtasks": [
+        {
+          "id": "T17.1",
+          "description": "Add main landmark; eyebrow to #6E665B (5.15); audit live 80/93/100/100 -> 80/95/100/100; CSS cache noted."
+        }
+      ],
+      "tests": [
+        {
+          "description": "gate script or API check passes",
+          "kind": "integration"
+        }
+      ],
+      "acceptance_criteria": [
+        "recorded in agent-log and pushed"
+      ],
+      "depends_on": [
+        "T16"
+      ],
+      "estimated_loc": 120
     }
   ]
 }

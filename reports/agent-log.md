@@ -19,3 +19,4 @@
 - 2026-09-25 T15: live-content PASS (hero-9, no banned, 4 anchors, NAP, tel, 5+ imgs). Findings: WSL-python 403 -> fetch via curl+UA; live mailto is CF-obfuscated (__cf_email__), gate accepts both.
 - 2026-09-25 T16: optimize-loop CSS prune 8089->7192B (-11%): removed .hero-image/.about-image/.gallery(x3)/.practice-panel-inner/.practice-panel.is-open + dead img/hover groups. Kept .is-scrolled (live JS). Gate PASS.
 - 2026-09-25 T17: a11y fixes (main landmark, eyebrow #7B7267 4.31 -> #6E665B 5.15). Caught own bug: prepended color lost to later declaration, fixed by swap. Gate PASS.
+- 2026-09-25 T17-loop: live audit1 80/93/100/100 -> fixes (main, eyebrow #6E665B) -> audit2 80/95/100/100. Residual contrast = stale CF CSS (live css lacks 6E665B, html fresh). Perf 80 has zero LH opportunities, lab-bound. tasks.json extended T12-T17, validator ok.
