@@ -22,3 +22,4 @@
 - 2026-09-25 T17-loop: live audit1 80/93/100/100 -> fixes (main, eyebrow #6E665B) -> audit2 80/95/100/100. Residual contrast = stale CF CSS (live css lacks 6E665B, html fresh). Perf 80 has zero LH opportunities, lab-bound. tasks.json extended T12-T17, validator ok.
 - 2026-09-25 T18: audit3 78/100/100/100. a11y 93->100 CLOSED. Perf 78-80 plateau, zero LH opportunities, lab-bound -> STOP per optimize rule (no blind changes). Old audits pruned, final kept. Skills end: plan/execute/optimize/debug done; prompt-optimize N/A (no prompts in repo). Human leftovers: Pages https toggle, real-device glance.
 - 2026-09-25 T19: confirmed T18 logged+pushed (9ac9331 in sync with origin/main). Live sanity re-check.
+- 2026-09-25 T20: hero responsive srcset (800w 26KB webp / 1200w 43KB) for mobile LCP bytes. Gate PASS.
