@@ -430,3 +430,11 @@ footer .container{
 .practice-media{margin:0;background:var(--surface);border:1px solid var(--line);padding:.9rem;position:sticky;top:6rem;}
 .practice-media img{aspect-ratio:3/4;object-fit:cover;}
 @media (max-width:900px){.practice-grid{grid-template-columns:1fr;}.practice-media{position:static;}}
+.values-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:5rem;align-items:start;}
+.values{margin-top:2.5rem;}
+.value{padding:1.4rem 0;border-bottom:1px solid var(--line);}
+.value strong{display:block;letter-spacing:.12em;font-size:.85rem;margin-bottom:.4rem;}
+.value span{color:var(--muted);}
+.values-media{margin:0;background:var(--surface);border:1px solid var(--line);padding:.9rem;}
+.values-media img{aspect-ratio:4/5;object-fit:cover;}
+@media (max-width:900px){.values-grid{grid-template-columns:1fr;}}
