@@ -1,3 +1,4 @@
 *:Zone.Identifier
 .playwright-mcp/
 .claude/
+__pycache__/
