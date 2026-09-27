@@ -43,4 +43,12 @@
 
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
+
+  const since = document.querySelector('[data-years-since]');
+  if (since) {
+    const n = new Date().getFullYear() - Number(since.dataset.yearsSince);
+    const few = n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14);
+    since.textContent = n;
+    document.querySelector('[data-years-word]').textContent = few ? 'lata' : 'lat';
+  }
 })();

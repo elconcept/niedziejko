@@ -172,7 +172,7 @@ def main():
     coeffs = (h / h[2, 2]).flatten()[:8]
     warp = lambda im: im.transform(base.size, Image.PERSPECTIVE, tuple(coeffs), Image.BICUBIC)
     typed_w = np.asarray(warp(typed), float) / 255
-    hand_w = np.asarray(warp(hand.filter(ImageFilter.GaussianBlur(0.8))), float)
+    hand_w = np.asarray(warp(hand.filter(ImageFilter.GaussianBlur(1.0))), float)
     clip = np.asarray(area, float) / 255
 
     arr = np.asarray(base, float)
@@ -181,7 +181,7 @@ def main():
     a = (typed_w * 0.95 * uneven * clip)[..., None]
     ink = np.asarray(INK, float)[None, None, :]
     arr = arr * (1 - a) + (arr * ink / 255) * a                           # multiply blend: grain shows through
-    ha = (hand_w[..., 3] / 255 * clip * 0.92)[..., None]
+    ha = (hand_w[..., 3] / 255 * clip * 0.8)[..., None]
     arr = arr * (1 - ha) + (arr * hand_w[..., :3] / 255) * ha
     out = Image.fromarray(arr.clip(0, 255).astype(np.uint8))
 

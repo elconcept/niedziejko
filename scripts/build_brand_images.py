@@ -35,11 +35,13 @@ def lockup(out, scale, ink):
         "-size", f"1x{14 * scale}", "xc:none", l2, "-gravity", "center", "-append", "+repage", out)
 
 
-def place(page_w, page_h, rel_w, cx, cy, ink, out):
-    """Lockup on a transparent page canvas, centred at (cx, cy) as page fractions."""
+def place(page_w, page_h, rel_w, cx, cy, ink, out, rotate=0):
+    """Lockup on a transparent page canvas, centred at (cx, cy) as page fractions.
+    rel_w is the lockup length relative to the page side it runs along."""
     lk = os.path.join(TMP, "lk.png")
     lockup(lk, 3, ink)
-    run(lk, "-resize", f"{int(page_w * rel_w)}x", "+repage", lk)
+    along = page_h if rotate % 180 else page_w
+    run(lk, "-resize", f"{int(along * rel_w)}x", "-background", "none", "-rotate", str(rotate), "+repage", lk)
     run("-size", f"{page_w}x{page_h}", "xc:none", lk, "-gravity", "center",
         "-geometry", f"{int(page_w * cx) - page_w // 2:+d}{int(page_h * cy) - page_h // 2:+d}",
         "-composite", "+repage", out)
@@ -81,10 +83,14 @@ def practice():
 
 
 def folder():
-    """Letterpress lockup on the kraft folder (hero-9 crop, 737x1024)."""
+    """Letterpress lockup on the kraft folder (hero-9 crop, 737x1024).
+
+    Page canvas x runs along the front edge, y from the back edge to the front. The string
+    runs from the button to the right edge, so the flap - the folder's top - is on the left:
+    the lockup reads front-to-back with letter tops towards the left edge (rotate -90)."""
     k = 1.6
     base = os.path.join(TMP, "f_base.png"); upscale(f"{WEB}/hero-9.jpg", k, base)
-    page = os.path.join(TMP, "f_page.png"); place(2000, 1600, 0.31, 0.28, 0.56, "#1a1410", page)
+    page = os.path.join(TMP, "f_page.png"); place(2000, 1600, 0.46, 0.2, 0.52, "#1a1410", page, rotate=-90)
     ink = os.path.join(TMP, "f_ink.png")
     distort(page, [(355, 561), (772, 634), (85, 665), (520, 748)], k, f"{int(737 * k)}x{int(1024 * k)}", 0.5, ink)
     hi = os.path.join(TMP, "f_hi.png")

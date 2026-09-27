@@ -216,6 +216,11 @@ p { text-wrap: pretty; }
 .about-copy h2 { max-width: 12em; }
 .about-copy > p:not(.eyebrow) { margin-top: 1.8rem; max-width: 32em; color: #3b342e; }
 
+.since { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 2.4rem; }
+.since > div { padding-top: 1rem; border-top: 1px solid var(--espresso); }
+.since dt { font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.since dd { font-size: clamp(2.4rem, 1.8rem + 1.6vw, 3.4rem); line-height: 1.1; margin-top: .3rem; }
+.since .since-note { font-size: 1rem; line-height: 1.4; margin-top: .2rem; color: #4a423b; }
 .rule-list { margin-top: 2.4rem; border-top: 1px solid var(--line); }
 .rule-list li { display: flex; gap: 1.2rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
 .rule-list li::before { content: "\2014"; color: var(--muted); }
@@ -318,9 +323,9 @@ p { text-wrap: pretty; }
 .site-footer { background: var(--espresso-deep); color: #cdc2b3; padding: clamp(4rem, 8vw, 6rem) 0 2rem; font-size: 1rem; }
 .site-footer a { transition: color .3s; }
 .site-footer a:hover { color: var(--sheet); }
-.footer-top { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 2.5rem; align-items: start; }
-.footer-brand { display: flex; flex-direction: column; align-items: flex-start; }
-.footer-signature { width: 210px; margin-top: 1.2rem; opacity: .75; }
+.footer-top { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 2.5rem; align-items: start; }
+.footer-brand { display: flex; align-items: center; gap: 1.6rem; }
+.footer-signature { width: auto; height: 4.6rem; margin: -.6rem 0 -1rem; opacity: .8; }
 .footer-col h2 { font-size: .74rem; letter-spacing: .24em; text-transform: uppercase; color: var(--cream-muted); margin-bottom: 1rem; font-weight: 400; }
 .footer-col p { line-height: 1.8; }
 .footer-note { margin-top: 3.5rem; font-size: .88rem; font-style: italic; color: var(--cream-muted); }
@@ -411,5 +416,8 @@ p { text-wrap: pretty; }
   .letter-foot span, .letter-foot span:nth-child(2), .letter-foot span:last-child { text-align: left; }
   .contact-list > div { grid-template-columns: 1fr; gap: .2rem; }
   .footer-top { grid-template-columns: 1fr; }
+  .footer-brand { gap: 1rem; }
+  .lockup--footer { font-size: 1.15rem; }
+  .footer-signature { height: 3.4rem; min-width: 0; flex-shrink: 1; object-fit: contain; }
   .hero-areas { font-size: .72rem; }
 }
