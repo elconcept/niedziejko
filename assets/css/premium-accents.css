@@ -1,0 +1,77 @@
+/* T18–T20: sygnatura + premium akcenty — plik dodatkowy, nie modyfikuje styles.css */
+
+.hero-media { position: relative; }
+.hero-media .signature-watermark {
+  position: absolute;
+  right: 4%;
+  bottom: 6%;
+  width: 220px;
+  height: auto;
+  opacity: 0.09;
+  pointer-events: none;
+  filter: grayscale(1);
+  transform: rotate(-2deg);
+}
+
+.card-signoff { margin-bottom: 0.75rem; }
+.card-signature {
+  display: block;
+  width: 150px;
+  height: auto;
+  margin: -0.35rem 0 0.4rem -0.4rem;
+  opacity: 0.92;
+}
+
+.eyebrow { position: relative; display: inline-block; padding-bottom: 0.5rem; }
+.eyebrow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.25rem;
+  height: 2px;
+  background: #2F241D;
+}
+
+main figure > img:not(.signature-watermark) {
+  border: 1px solid #D9D1C8;
+  box-shadow: 0 18px 40px -20px rgba(37, 33, 29, 0.35);
+}
+
+.practice-list { counter-reset: practice-counter; }
+.practice-item button { position: relative; padding-left: 2.75rem; }
+.practice-item button::before {
+  counter-increment: practice-counter;
+  content: counter(practice-counter, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: "Baskervville", serif;
+  font-style: italic;
+  color: #2F241D;
+  opacity: 0.55;
+  font-size: 0.95rem;
+}
+
+.practice-panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.3s ease;
+}
+.practice-panel.is-open { max-height: 20rem; opacity: 1; }
+
+.values { counter-reset: value-counter; }
+.value { position: relative; padding-left: 2.5rem; }
+.value::before {
+  counter-increment: value-counter;
+  content: counter(value-counter, upper-roman);
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  font-family: "Baskervville", serif;
+  color: #2F241D;
+  opacity: 0.6;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
