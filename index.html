@@ -8,8 +8,8 @@
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preload" href="assets/fonts/eb-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/eb-garamond-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="assets/images/web/hero-letter-760.webp" imagesrcset="assets/images/web/hero-letter-760.webp 760w, assets/images/web/hero-letter.webp 1152w" imagesizes="(max-width: 900px) 100vw, 46vw" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/styles.css?v=f2b0f399b7">
+<link rel="preload" as="image" href="assets/images/web/hero-letter-760.webp" imagesrcset="assets/images/web/hero-letter-760.webp 760w, assets/images/web/hero-letter.webp 1152w" imagesizes="(max-width: 900px) 100vw, 40vw" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/styles.css?v=a0a3813475">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -60,8 +60,9 @@
 <main id="tresc">
 
   <section class="hero" id="top">
+    <div class="container hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow reveal">Kancelaria adwokacka &middot; Kraków</p>
+      <p class="eyebrow reveal">Kancelaria adwokacka&nbsp;&middot; Kraków</p>
       <h1 class="reveal">Rzetelna pomoc prawna oparta na analizie i&nbsp;doświadczeniu.</h1>
       <p class="lead reveal">Kancelaria świadczy pomoc prawną klientom indywidualnym oraz przedsiębiorcom. Każda sprawa analizowana jest indywidualnie z&nbsp;uwzględnieniem ryzyk, szans i&nbsp;realnych możliwości działania.</p>
       <div class="actions reveal">
@@ -77,11 +78,12 @@
     </div>
     <figure class="hero-media">
       <picture>
-        <source type="image/webp" srcset="assets/images/web/hero-letter-760.webp 760w, assets/images/web/hero-letter.webp 1152w" sizes="(max-width: 900px) 100vw, 46vw">
-        <img src="assets/images/web/hero-letter.jpg" srcset="assets/images/web/hero-letter-760.jpg 760w, assets/images/web/hero-letter.jpg 1152w" sizes="(max-width: 900px) 100vw, 46vw" alt="Pismo na papierze firmowym i wizytówka z nazwiskiem Kamil Niedziejko, adwokat, na ciemnym biurku" width="1152" height="1536" fetchpriority="high" decoding="async">
+        <source type="image/webp" srcset="assets/images/web/hero-letter-760.webp 760w, assets/images/web/hero-letter.webp 1152w" sizes="(max-width: 900px) 100vw, 40vw">
+        <img src="assets/images/web/hero-letter.jpg" srcset="assets/images/web/hero-letter-760.jpg 760w, assets/images/web/hero-letter.jpg 1152w" sizes="(max-width: 900px) 100vw, 40vw" alt="Pismo na papierze firmowym i wizytówka z nazwiskiem Kamil Niedziejko, adwokat, na ciemnym biurku" width="1152" height="1536" fetchpriority="high" decoding="async">
       </picture>
       <figcaption>ul. Dobrego Pasterza 189 &middot; Kraków</figcaption>
     </figure>
+    </div>
   </section>
 
   <section class="about" id="o-kancelarii">
@@ -98,7 +100,7 @@
       </div>
 
       <div class="letter-wrap reveal">
-      <article class="letter" aria-label="List od adwokata">
+      <article class="letter" lang="pl" aria-label="List od adwokata">
         <header class="letter-head">
           <span class="lockup">
             <span class="lockup-top">Adwokat</span>
@@ -106,12 +108,12 @@
           </span>
         </header>
         <p class="letter-place">Kraków</p>
-        <p class="letter-salutation">Szanowni Państwo,</p>
-        <p>sprawa, z&nbsp;którą przychodzą Państwo do kancelarii, rzadko jest wyłącznie sprawą prawną. Dlatego zaczynam od wysłuchania i&nbsp;dokładnej analizy dokumentów, a&nbsp;dopiero potem przedstawiam możliwe kierunki działania, ich ryzyka i&nbsp;koszty.</p>
+        <p class="letter-salutation"><img src="assets/images/web/salutation-ink.png" alt="Szanowny Panie," width="373" height="197" loading="lazy" decoding="async"></p>
+        <p>sprawa, z&nbsp;którą przychodzi Pan do kancelarii, rzadko jest wyłącznie sprawą prawną. Dlatego zaczynam od wysłuchania i&nbsp;dokładnej analizy dokumentów, a&nbsp;dopiero potem przedstawiam możliwe kierunki działania, ich ryzyka i&nbsp;koszty.</p>
         <p>Sprawę prowadzę osobiście, od pierwszej rozmowy do jej zakończenia.</p>
         <div class="letter-sign">
           <p>z poważaniem</p>
-          <img src="assets/images/web/signature-ink.png" alt="Podpis Kamila Niedziejki" width="407" height="171" loading="lazy" decoding="async">
+          <img src="assets/images/web/signature-ink.png" alt="Podpis Kamila Niedziejki" width="604" height="315" loading="lazy" decoding="async">
           <p>Adwokat Kamil Niedziejko</p>
         </div>
         <footer class="letter-foot">
@@ -233,7 +235,7 @@
           <span class="lockup-top">Adwokat</span>
           <span class="lockup-name">Kamil Niedziejko</span>
         </span>
-        <img class="footer-signature" src="assets/images/web/signature-paper.png" alt="" width="407" height="171" loading="lazy" decoding="async">
+        <img class="footer-signature" src="assets/images/web/signature-paper.png" alt="" width="604" height="315" loading="lazy" decoding="async">
       </div>
       <div class="footer-col">
         <h2>Kancelaria</h2>
