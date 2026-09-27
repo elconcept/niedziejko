@@ -8,7 +8,13 @@ def chk(cond, msg):
     if not cond: errs.append(msg)
 chk("web/2.jpg" not in s, "banned web/2.jpg still referenced")
 chk("2.png" not in s or "quarantine" in s, "banned 2.png referenced in HTML")
-chk('<link rel="stylesheet" href="assets/css/styles.css">' in s, "stylesheet link missing")
+import hashlib
+for a in ["assets/css/styles.css", "assets/js/main.js"]:
+    h = hashlib.sha256((root / a).read_bytes()).hexdigest()[:10]
+    chk(f'{a}?v={h}"' in s, f"{a} reference missing or stale cache-bust stamp (run scripts/stamp_assets.py)")
+chk("fonts.googleapis.com" not in s and "fonts.gstatic.com" not in s, "third-party font request (fonts must be self-hosted)")
+for ref in sorted(set(re.findall(r"assets/[\w./-]+\.\w+", s))):
+    chk((root / ref).exists(), f"missing asset {ref}")
 for a in ["#praktyka", "#o-kancelarii", "#wartosci", "#kontakt"]:
     chk(f'href="{a}"' in s, f"nav anchor {a} missing")
 for sid in ["praktyka", "o-kancelarii", "kontakt"]:

@@ -93,10 +93,72 @@ def folder():
     encode(out, "desk-folder", [1100, 720])
 
 
+LETTER_BODY = [
+    "w odpowiedzi na Państwa zapytanie uprzejmie informuję, że kancelaria podejmie się "
+    "prowadzenia sprawy. Przed pierwszym spotkaniem proszę o przygotowanie posiadanych "
+    "dokumentów, w szczególności korespondencji z drugą stroną oraz pism otrzymanych z sądu.",
+    "Podczas spotkania omówimy stan faktyczny, możliwe kierunki działania oraz związane "
+    "z nimi ryzyka i koszty. Po analizie dokumentów przedstawię pisemną rekomendację "
+    "dalszych kroków.",
+    "Proszę o kontakt telefoniczny lub mailowy w celu ustalenia dogodnego terminu spotkania.",
+]
+
+
 def card():
-    """Business card + letter on the desk (contact-6 crop, 768x1024) - hero image."""
-    out = os.path.join(TMP, "c_out.png"); upscale(f"{WEB}/contact-6.jpg", 1.5, out)
-    encode(out, "hero-card", [1152, 760])
+    """Business card + letter on the desk (contact-6 crop, 768x1024) - hero image.
+
+    The generated photo carried pseudo-text with warped lines; it is removed and replaced
+    by a real letter on the firm's letterhead, mapped onto the sheet in perspective.
+    """
+    k = 1.5
+    W, H = int(768 * k), int(1024 * k)
+    base = os.path.join(TMP, "c_base.png"); upscale(f"{WEB}/contact-6.jpg", k, base)
+
+    # text area of the top sheet, above the business card (source-crop pixels)
+    poly = [(-5, 689), (302.5, 642.5), (550, 803), (165, 886), (145, 885)]
+    pts = " ".join(f"{x * k:.0f},{y * k:.0f}" for x, y in poly)
+    mask = os.path.join(TMP, "c_mask.png")
+    run("-size", f"{W}x{H}", "xc:black", "-fill", "white", "-draw", f"polygon {pts}", "-alpha", "off",
+        "-morphology", "Erode", "Disk:5", "-blur", "0x3", mask)
+    clean = os.path.join(TMP, "c_clean.png")
+    run(base, "-morphology", "Close", "Disk:14", "-blur", "0x9", "-attenuate", "0.3", "+noise", "Gaussian", clean)
+    run(base, clean, mask, "-composite", base)
+
+    # letter page, A4 proportions, drawn at 1400x1980
+    PW, PH, M = 1400, 1980, 160
+    page = os.path.join(TMP, "c_page.png")
+    lk = os.path.join(TMP, "c_lk.png"); lockup(lk, 3, "#25211d")
+    run(lk, "-resize", f"{int(PW * 0.46)}x", lk)
+    parts = [os.path.join(TMP, f"c_p{i}.png") for i in range(len(LETTER_BODY) + 2)]
+    common = ["-background", "none", "-fill", "#25211d", "-font", FONT, "-pointsize", "42",
+              "-interline-spacing", "16", "-size", f"{PW - 2 * M}x"]
+    run(*common, "-gravity", "east", "caption:Kraków, dnia 14 września 2026 r.", parts[0])
+    run(*common, "-gravity", "west", "caption:Szanowni Państwo,", parts[1])
+    for i, para in enumerate(LETTER_BODY):
+        run(*common, "-gravity", "west", "caption:  " + para, parts[i + 2])
+    stack = ["-size", f"{PW - 2 * M}x60", "xc:none", parts[0], "-size", f"{PW - 2 * M}x50", "xc:none", parts[1],
+             "-size", f"{PW - 2 * M}x18", "xc:none"]
+    for p in parts[2:]:
+        stack += [p, "-size", f"{PW - 2 * M}x14", "xc:none"]
+    signoff = os.path.join(TMP, "c_sign.png")
+    run("-background", "none", "-fill", "#25211d", "-font", FONT, "-pointsize", "42", "label:z poważaniem",
+        "(", f"{WEB}/signature-ink.png", "-resize", "300x", ")", "-gravity", "center", "-append",
+        "-gravity", "east", "-splice", "240x0", "-extent", f"{PW - 2 * M}x", "+repage", signoff)
+    stack += [signoff]
+    body = os.path.join(TMP, "c_body.png")
+    run("-background", "none", *stack, "-append", "+repage", body)
+    run("-size", f"{PW}x{PH}", "xc:none", lk, "-gravity", "north", "-geometry", "+0+165", "-composite",
+        body, "-gravity", "north", "-geometry", "+0+400", "-composite", "+repage", page)
+
+    ink = os.path.join(TMP, "c_ink.png")
+    distort(page, [(-5, 689), (302.5, 642.5), (222.5, 986), (660, 876)], k, f"{W}x{H}", 0.55, ink)
+    # clip to the sheet area above the card, soften like offset print
+    alpha = os.path.join(TMP, "c_alpha.png")
+    run(ink, "-alpha", "extract", mask, "-fx", "u*v*0.9", alpha)
+    run(ink, "-alpha", "off", alpha, "-compose", "CopyOpacity", "-composite", ink)
+    out = os.path.join(TMP, "c_out.png")
+    run(base, ink, "-compose", "over", "-composite", out)
+    encode(out, "hero-letter", [1152, 760])
 
 
 def signature():
@@ -123,7 +185,7 @@ def og_image():
     lk = os.path.join(TMP, "og_lk.png"); lockup(lk, 3, "#25211d")
     run(lk, "-resize", "440x", lk)
     photo = os.path.join(TMP, "og_ph.png")
-    run(f"{WEB}/hero-card.jpg", "-resize", "560x", "-gravity", "south", "-crop", "560x630+0+0", "+repage", photo)
+    run(f"{WEB}/hero-letter.jpg", "-resize", "560x", "-gravity", "south", "-crop", "560x630+0+0", "+repage", photo)
     run("-size", "1200x630", "xc:#f7f4ef", lk, "-gravity", "west", "-geometry", "+100-40", "-composite",
         "-font", FONT.replace("Regular", "Italic"), "-fill", "#6b6258", "-pointsize", "30",
         "-gravity", "west", "-annotate", "+100+80", "Kancelaria adwokacka · Kraków",
